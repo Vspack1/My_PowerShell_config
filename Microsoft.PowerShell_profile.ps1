@@ -24,6 +24,17 @@ Set-PSReadLineKeyHandler -Key Tab -Function Complete
 Set-PSReadLineOption -PredictionViewStyle ListView
 
 # Run Fastfetch at startup
-& "C:/Fastfetch/fastfetch.exe"
+#Normal: "C:/Fastfetch/fastfetch.exe"
+if (Get-Command fastfetch -ErrorAction SilentlyContinue) {
+    fastfetch
+}
+
+#Get tools list command
+function tools {
+    Get-Command -CommandType Application |
+    Where-Object { $_.Source -match 'scoop|choco|winget|shims|Program Files' } |
+    Sort-Object Name |
+    Format-Table Name, Source -AutoSize
+}
 
 
