@@ -37,4 +37,10 @@ function tools {
     Format-Table Name, Source -AutoSize
 }
 
+function reload {
+	. $PROFILE
+}
 
+function config {
+	nvim $PROFILE
+}
